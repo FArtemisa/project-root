@@ -206,3 +206,6 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 project-root/
+
+#/data para evitar que se suba algo de la carpeta data a github
+data/
