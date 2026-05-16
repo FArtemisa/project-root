@@ -112,12 +112,12 @@ churn-mlops-project/
 
 ## ✅ Checklist de Entrega
 
-*   [ ] El comando `python -m src.main` ejecuta todo el pipeline sin errores.
-*   [ ] El archivo `config/params.yaml` existe y controla los hiperparámetros.
-*   [ ] Hay al menos 2 modelos diferentes implementados en el código.
-*   [ ] El script `predict.py` carga el modelo y hace una predicción de ejemplo.
-*   [ ] El historial de Git muestra contribuciones de los 4 miembros del equipo.
-*   [ ] El `README.md` final incluye los resultados obtenidos (Accuracy/Recall del mejor modelo).
+*   [x] El comando `python -m src.main` ejecuta todo el pipeline sin errores.
+*   [x] El archivo `config/params.yaml` existe y controla los hiperparámetros.
+*   [x] Hay al menos 2 modelos diferentes implementados en el código.
+*   [x] El script `predict.py` carga el modelo y hace una predicción de ejemplo.
+*   [x] El historial de Git muestra contribuciones de los 4 miembros del equipo.
+*   [x] El `README.md` final incluye los resultados obtenidos (Accuracy/Recall del mejor modelo).
 
 
 
@@ -164,3 +164,24 @@ pytest tests/ -q
 ```
 
 ---
+
+## 🤖 Contribución de LLM
+
+Cada integrante documenta aquí qué herramienta de IA usó y para qué tarea concreta.
+
+### 👷 Data Engineer — `src/data_loader.py`
+- **Herramienta:** ChatGPT
+- **Uso:** Usé un LLM para definir la estructura inicial de la función load_and_preprocess_data y para depurar/mejorar la lógica del código (por ejemplo, correcciones en la imputación por mediana y en la forma segura de asignar resultados en pandas).
+
+### 🧠 ML Engineer — `src/model_trainer.py`
+- **Herramienta:** Gemini 3 Flash
+- **Uso:** Solicité al LLM el desarrollo de un sistema de comparación que evalúa las métricas de todos los modelos entrenados y selecciona automáticamente el ganador basado en una métrica configurable.
+
+### ⚙️ MLOps Engineer — `src/main.py` y `config/params.yaml`
+- **Herramienta:** Deepseek
+- **Uso:** Validación defensiva del YAML (secciones y campos requeridos) y orquestación
+  del pipeline con manejo de errores y trazas claras por etapa. Además de asesoramiento sobre conceptos básicos y consejos para la depuración del proyecto para asegurar que el proyecto pueda ejecutarse correctamente
+
+### 🛡️ QA & Production Engineer — `src/predict.py` y `tests/test_pipeline.py`
+- **Herramienta:** ChatGPT
+- **Uso:** Use un LLM (chat gpt) para mejorar la estructura de mi código en el test_pipeline.py y pedir sugerencias para hacer más eficiente el predict. Además, realicé consultas relacionadas con el uso de GitHub y la ejecución de comandos en la terminal para la gestión y control del proyecto.
