@@ -1,5 +1,5 @@
 data:
-  raw_path: "data/raw/WA_Fn-UseC-Telco-Customer-Churn.csv"
+  raw_path: "data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv"
   
   test_size: 0.2
   
@@ -8,15 +8,20 @@ data:
 model:
   # Nombre del modelo a entrenar. Opciones: "RandomForest", "LogisticRegression", "SVM"
   name: "RandomForest"
+  train_all: true
+  selection_metric: "f1_score"
   
   n_estimators: 100      
   max_depth: 10          
   
   max_iter: 1000        
-  class_weight: "balanced"  
+  class_weight: "balanced"
+  solver: "lbfgs"  
   
   C: 1.0                 
-  kernel: "rbf"          
+  kernel: "rbf"
+  probability: true          
 
 paths:
   model_save: "models/model.pkl"
+  features_save: "models/features.pkl"

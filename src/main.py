@@ -15,22 +15,19 @@ def load_config(config_path="config/params.yaml"):
         config = yaml.safe_load(f)
     
     # Validación de secciones mínimas requeridas
-    required_sections = ["data", "model", "paths"]
-    for section in required_sections:
+    for section in ("data", "model", "paths"):
         if section not in config:
             raise KeyError(f"Falta la sección '{section}' en {config_path}")
     
     # Validación de campos críticos dentro de 'data'
-    data_required = ["raw_path", "test_size", "random_state"]
-    for field in data_required:
+    for field in ("raw_path", "test_size", "random_state"):
         if field not in config["data"]:
             raise KeyError(f"Falta el campo '{field}' en data de {config_path}")
     
     # Validación del modelo soportado
-    supported_models = ["RandomForest", "LogisticRegression", "SVM"]
-    model_name = config["model"].get("name")
-    if model_name not in supported_models:
-        raise ValueError(f"Modelo '{model_name}' no soportado. Usa: {supported_models}")
+    supported = ["RandomForest", "LogisticRegression", "SVM"]
+    if config["model"].get("name") not in supported:
+        raise ValueError(f"Modelo no soportado. Usa: {supported}")
     
     # Validación de ruta de guardado del modelo
     if "model_save" not in config["paths"]:
@@ -57,8 +54,9 @@ def main():
         metrics = train_and_save_model(X_train, y_train, X_test, y_test, config)
         
         # Mostrar resultados
-        print("PIPELINE FINALIZADO CON ÉXITO")
+        print("PIPELINE FINALIZADO")
         print("\nMétricas obtenidas en el conjunto de prueba:")
+        print(f"  - Mejor modelo : {metrics['best_model']}")
         print(f"  - Accuracy : {metrics['accuracy']:.4f}")
         print(f"  - Recall   : {metrics['recall']:.4f}")
         print(f"  - F1 Score : {metrics['f1_score']:.4f}")

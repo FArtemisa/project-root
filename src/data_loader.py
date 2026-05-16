@@ -1,5 +1,4 @@
 import pandas as pd
-import yaml
 from sklearn.model_selection import train_test_split
 
 
@@ -29,6 +28,11 @@ def load_and_preprocess_data(config):
 	df['gender'] = df['gender'].map({'Male': 1, 'Female': 0})
 	df['Partner'] = df['Partner'].map({'Yes': 1, 'No': 0})
 	df['Churn'] = df['Churn'].map({'Yes': 1, 'No': 0})
+	categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
+	if categorical_cols:
+		df = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
+	bool_cols = df.select_dtypes(include=['bool']).columns
+	df[bool_cols] = df[bool_cols].astype(int)
 
 	# Separación de variables independientes y variable dependiente
 	X = df.drop(columns = ['Churn'])

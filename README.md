@@ -121,4 +121,46 @@ churn-mlops-project/
 
 
 
-¡Éxito con la clase! Es un ejercicio excelente para ver quién realmente entiende la integración de sistemas. 🚀
+---
+
+## 📊 Resultados del mejor modelo
+
+Tras entrenar los 3 modelos (selección por `f1_score`) sobre el split estratificado
+(`test_size=0.2`, `random_state=42`):
+
+| Modelo               | Accuracy | Recall | F1-Score |
+|----------------------|----------|--------|----------|
+| RandomForest         | 0.8041   | 0.5187 | 0.5843   |
+| LogisticRegression   | 0.7388   | 0.7807 | 0.6134   |
+| **SVM** ⭐           | **0.7473** | **0.7674** | **0.6172** |
+
+**Mejor modelo seleccionado: `SVM`** (con `StandardScaler` previo dentro de un `Pipeline`).
+- **Accuracy:** 0.7473
+- **Recall:**   0.7674  *(crítico para Churn — capturamos ~77% de los clientes que abandonan)*
+- **F1-Score:** 0.6172
+
+> El modelo y la lista de columnas usadas durante el entrenamiento se guardan en
+> `models/model.pkl` y `models/features.pkl` para que `predict.py` pueda alinear
+> correctamente las features de un cliente nuevo.
+
+---
+
+## 🚀 Cómo ejecutar el proyecto
+
+```bash
+# 1. Instalar dependencias
+pip install -r requirements.txt
+
+# 2. Colocar el CSV en data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv
+
+# 3. Entrenar el pipeline completo
+python -m src.main
+
+# 4. Probar la predicción sobre un cliente de ejemplo
+python -m src.predict
+
+# 5. Correr los tests unitarios
+pytest tests/ -q
+```
+
+---
